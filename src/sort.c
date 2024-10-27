@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+// generate array with random values
 void generate_array(int *arr, int size) {
   for (int i = 0; i < size; i++) {
     arr[i] = rand() % 1000;
@@ -57,6 +58,7 @@ int main(int argc, char *argv[]) {
   clock_t end;
 
   for (int r = 0; r < repeats; r++) {
+    // test multiple sorting algorithms
     start = clock();
     generate_array(arr, n);
     quicksort(arr, 0, n - 1);
