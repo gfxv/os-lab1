@@ -3,12 +3,13 @@
 # Usage: python3 generate.py <filename>
 
 import os
-import sys
-import string
 import random
+import string
+import sys
 
 TARGET_SIZE = 300 # 300 MB
 BUFFER_SIZE = 2**16
+
 
 def generate_random(length: int) -> str:
     letters = string.ascii_letters
@@ -16,18 +17,14 @@ def generate_random(length: int) -> str:
 
 
 def main(args) -> None:
-    print(args)
     if len(args) < 2:
         raise ValueError(f"usage: python3 {args[0]} <filename>")
 
     filename = args[1]
-
     with open(filename, "a+", encoding="utf-8") as file:
         print("generating...")
         while True:
             if os.path.getsize(filename) / (1024*1024) > 300:
-                print("in bytes:" ,os.path.getsize(filename))
-                print("in MB: ", os.path.getsize(filename) / (1024*1024))
                 break
             chunk = generate_random(BUFFER_SIZE)
             file.write(chunk)
