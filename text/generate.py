@@ -1,4 +1,6 @@
 # A simple script that generates a txt file of TARGET_SZIE
+# 
+# Usage: python3 generate.py <filename>
 
 import os
 import sys
