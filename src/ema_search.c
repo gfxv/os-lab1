@@ -3,17 +3,24 @@
 #include <string.h>
 #include <time.h>
 
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE 128
 
-void find_substring(const char *buffer, const char *substring, int line_number) {
-  const char *ptr = buffer;
-  int position;
-
-  while ((ptr = strstr(ptr, substring)) != NULL) {
-    position = ptr - buffer;
-    printf("Found substring at line %d, position %d\n", line_number, position);
-    ptr++;
-  }
+int search_substring(const char *buffer, const char *substring) {
+    int i, j;
+    if (substring[0] == '\0') {
+        return -1;
+    }
+    for (i = 0; buffer[i] != '\0'; i++) {
+        for (j = 0; substring[j] != '\0'; j++) {
+            if (buffer[i + j] != substring[j]) {
+                break;
+            }
+        }
+        if (substring[j] == '\0') {
+            return i; 
+        }
+    }
+    return -1;
 }
 
 int process_file(const char *filename, const char *substring) {
@@ -23,11 +30,15 @@ int process_file(const char *filename, const char *substring) {
     return EXIT_FAILURE;
   }
 
+  int iteration = 0;
   char buffer[BUFFER_SIZE];
-  int line_number = 0;
   while (fgets(buffer, BUFFER_SIZE, file)) {
-    line_number++;
-    find_substring(buffer, substring, line_number);
+    int index = search_substring(buffer, substring);
+    if (index != -1) {
+      printf("Found substring at position %d\n", iteration * BUFFER_SIZE + index);
+      break;
+    }
+    iteration++;
   }
   fclose(file);
 
