@@ -9,6 +9,10 @@ RUN apt-get update && apt-get install -y \
     vim \
     openssh-server \
     sysstat \
+    linux-tools-generic \
+    strace \
     && apt-get clean
+
+RUN alias perf=$(find /usr/lib/linux-tools/*/perf | head -1)
 
 WORKDIR /workspace
