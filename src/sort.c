@@ -31,6 +31,8 @@ void quicksort(int *arr, int low, int high) {
   }
 }
 
+// бабл сорт чисто для сравнения с квик сортом
+// во всех тестах используется квик сорт
 void bubble_sort(int *arr, int size) {
   for (int i = 0; i < size - 1; i++) {
     for (int j = 0; j < size - i - 1; j++) {
@@ -64,20 +66,23 @@ int main(int argc, char *argv[]) {
     quicksort(arr, 0, n - 1);
     end = clock();
 
-    printf("[%d] Quicksort execution time: %lf seconds\n", r+1, (double) (end - start) / CLOCKS_PER_SEC);
+    printf("[%d] Quicksort execution time: %lf seconds\n", r + 1,
+           (double)(end - start) / CLOCKS_PER_SEC);
 
-    start = clock();
-    generate_array(arr, n);
-    bubble_sort(arr, n);
-    end = clock();
-
-    printf("[%d] Bubble sort execution time: %lf seconds\n", r+1, (double) (end - start) / CLOCKS_PER_SEC);
+    //    start = clock();
+    //    generate_array(arr, n);
+    //    bubble_sort(arr, n);
+    //    end = clock();
+    //
+    //    printf("[%d] Bubble sort execution time: %lf seconds\n", r+1, (double)
+    //    (end - start) / CLOCKS_PER_SEC);
   }
   clock_t end_total = clock();
 
   free(arr);
   printf("\n");
-  printf(">>> Total execution time: %lf seconds <<<\n\n", (double) (end_total - start_total) / CLOCKS_PER_SEC);
+  printf(">>> Total execution time: %lf seconds <<<\n\n",
+         (double)(end_total - start_total) / CLOCKS_PER_SEC);
 
   return 0;
 }
